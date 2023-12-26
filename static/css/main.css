@@ -1,0 +1,9 @@
+.card-hover-effect {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.group:hover .absolute {
+    display: block;
+}

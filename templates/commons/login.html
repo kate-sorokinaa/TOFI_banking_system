@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Log in{% endblock title %}
+
+{% block content %}
+    <h2 class="text-2xl text-center font-bold mb-4 mt-4">Log in</h2>
+    <form action="." method="post" class="mx-auto  bg-white p-8 rounded shadow-md w-1/2">
+
+        {% csrf_token %}
+         {{ form.non_field_errors }}
+        <div class="mb-4">
+            <label for="{{ form.username.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+            <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" placeholder="Enter the email" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="mb-4">
+            <label for="{{ form.password.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+            <input type="password" id="{{ form.password.id_for_label }}" name="{{ form.password.name }}" placeholder="Your first name" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="mb-4">
+            <label for="{{ form.otp_token.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">Google Auth token</label>
+            <input type="text" id="{{ form.otp_token.id_for_label }}" name="{{ form.otp_token.name }}" placeholder="Verification token" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            {% if form.otp_token.errors %}
+                {% for error in form.otp_token.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Log In</button>
+        <a href="{% url 'password_reset' %}" class="text-blue-500 flex justify-right mt-4">Forgot password</a>
+
+
+    </form>
+{% endblock content %}

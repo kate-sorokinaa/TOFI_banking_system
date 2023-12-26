@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+{% block content %}
+      <style>
+      .card-container {
+        transition: transform 0.3s;
+      }
+
+      .card-container:hover {
+          transform: scale(1.03)  !important;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)  !important;
+      }
+    </style>
+  <div class="container mx-auto mt-8">
+    <h2 class="text-3xl font-semibold mb-4 ">Your cards</h2>
+    <div class="flex items-center justify-center mt-4 mb-8">
+        <button class="bg-blue-500 text-center hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <a href="{% url 'accounts:create_card' %}">Create a new card</a>
+        </button>
+      </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:w-1/2 md:w-full lg:w-full">
+      {% for card in cards %}
+       <div class="bg-white rounded-lg overflow-hidden shadow-md card-container">
+          <div class="p-4">
+            <h5 class="text-xl font-semibold mb-2">{{ card.card_name }}</h5>
+              <p class="text-gray-600 mb-2">Card Type: {{ card.get_card_type_display }}</p>
+            <p class="text-gray-600 mb-2">Balance: {{ card.balance }} {{ card.get_currency_display }}</p>
+            <p class="text-gray-600 mb-2">Card Number: {{ card.account_no }}</p>
+            <p class="text-gray-600 mb-2">CVV: <span id="cvv-{{ card.id }}" class="cvv-password">***</span>
+              <button class="text-blue-500 hover:underline focus:outline-none focus:underline btn-sm show-cvv" data-card-id="{{ card.id }}" data-cvv-code="{{ card.cvv_code }}">Show CVV</button>
+            </p>
+                <div class="flex items-center justify-center mt-3">
+                    <button class="bg-blue-700 text-center hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        <a href="{% url 'accounts:card_history' card.id %}">History</a>
+                    </button>
+                      <button class="bg-orange-700 ml-8 text-center hover:bg-orange-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        <a href="{% url 'accounts:deposit_form' card.id %}">Deposit</a>
+                    </button>
+                </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.show-cvv').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        let cardId = this.dataset.cardId;
+        let cvvCode = this.dataset.cvvCode;
+        let cvvElement = document.getElementById('cvv-' + cardId);
+
+        if (cvvElement.textContent === cvvCode) {
+          cvvElement.textContent = '***';
+        } else {
+          cvvElement.textContent = cvvCode;
+        }
+      });
+    });
+  });
+</script>
+
+{% endblock %}

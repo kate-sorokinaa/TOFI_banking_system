@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <div class="max-w-md mx-auto mt-8 bg-white p-8 rounded shadow-md">
+  <h2 class="text-2xl font-semibold mb-4">Deposits Approval</h2>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="id_approved">
+        Approve a deposit
+      </label>
+      <input type="checkbox" id="id_approved" name="approved" class="mr-2 leading-tight">
+      <span class="text-sm text-gray-600">Check this box to approve the deposit.</span>
+    </div>
+
+    <div class="mb-4">
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

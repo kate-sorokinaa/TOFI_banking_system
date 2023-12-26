@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto mt-8 bg-white p-8 rounded shadow-md">
+  <h2 class="text-2xl font-semibold mb-4">Credit Applications</h2>
+
+  <ul>
+    {% for credit_application in credit_applications %}
+      <li class="border-b border-gray-300 py-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-gray-700 font-bold">Amount:</span> {{ credit_application.amount }} <br>
+            <span class="text-gray-700 font-bold">Purpose:</span> {{ credit_application.purpose }} <br>
+            <span class="text-gray-700 font-bold">Status:</span> {{ credit_application.status }} <br>
+          </div>
+          {% if credit_application.status == 'PENDING' %}
+            <a href="{% url 'credits:approve_credit' credit_application.id %}" class="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+              Approve
+            </a>
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

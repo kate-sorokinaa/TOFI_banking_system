@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <div class="max-w-md mx-auto mt-8 bg-white p-8 shadow-md">
+        <h2 class="flex items-center justify-center text-2xl font-semibold mb-6">Make a Deposit</h2>
+        <form method="post" action="{% url 'accounts:deposit_form' card.id %}" class="space-y-4">
+            {% csrf_token %}
+            <div class="items-center justify-center mb-8">
+                <label for="deposit_amount" class="block text-sm font-medium text-gray-600">Deposit Amount</label>
+                <input type="text" name="deposit_amount" id="deposit_amount" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Enter the deposit amount">
+            </div>
+             {% if form.deposit_amount.errors %}
+                    {% for error in form.deposit_amount.errors %}
+                        <p class="text-red-600 text-sm italic mt-2">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+
+            <div class="flex items-center justify-center">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Deposit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

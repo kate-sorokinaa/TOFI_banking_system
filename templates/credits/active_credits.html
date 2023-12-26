@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto mt-8 bg-white p-8 rounded shadow-md">
+  <h2 class="text-2xl font-semibold mb-4">Active Credits</h2>
+
+  <ul>
+    {% for credit in user_credits %}
+      <li class="border-b border-gray-300 py-4">
+        <div>
+          <span class="text-gray-700 font-bold">Amount:</span> {{ credit.amount }} BYN<br>
+          <span class="text-gray-700 font-bold">Interest Rate:</span> {{ credit.interest_rate }} %<br>
+          <span class="text-gray-700 font-bold">Term Months:</span> {{ credit.term_months }} <br>
+          <span class="text-gray-700 font-bold">Monthly Payment:</span> {{ credit.monthly_payment }} BYN<br>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

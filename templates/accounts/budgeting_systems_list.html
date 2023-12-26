@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2 class="text-2xl font-semibold mb-4 mt-4">Active Budgeting Systems</h2>
+{% if active_budgeting_systems %}
+  <table class="min-w-full">
+    <thead>
+      <tr>
+        <th class="py-2 ">Budgeting System Name</th>
+        <th class="py-2 pl-0">Description</th>
+        <th class="py-2 pl-0">Card</th>
+        <th class="py-2 pl-0">Savings card</th>
+        <th class="py-2 pl-0">Daily control</th>
+        <th class="py-2 pl-0">Daily percent</th>
+        <th class="py-2 pl-0">Daily budget</th>
+        <th class="py-2 pl-0">Budget left for the day</th>
+        <th class="py-2 pl-0">Savings percent</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for system in active_budgeting_systems %}
+        <tr>
+          <td class="py-2 pl-0 text-center">{{ system.name }}</td>
+          <td class="py-2 pl-0 text-center">{{ system.description }}</td>
+          <td class="py-2 pl-0 text-center">{{ system.card }}</td>
+          <td class="py-2 pl-0 text-center">{{ system.savings_card }}</td>
+          <td class="py-2 pl-0 text-center">{{ system.daily_control }}</td>
+          <td class="py-2 pl-0 text-center">{{ system.daily_percent }}</td>
+          <td class="py-2 pl-0 text-center">{{ system.card.fixated_sum }}</td>
+          <td class="py-2 pl-0 text-center">{{ system.card.daily_balance }}</td>
+          <td class="py-2 pl-0 text-center">{{ system.savings_percent }}</td>
+            <td class="py-2 pl-0 text-center">
+            <form method="post" action="{% url 'accounts:delete_budgeting_system' system.id %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="text-red-500 hover:underline ml-2">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No budget systems</p>
+{% endif %}
+{% endblock %}

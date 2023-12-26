@@ -1,0 +1,77 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+      <h2 class="flex text-2xl font-semibold mt-4 justify-center">Create a Budgeting System</h2>
+<div class="w-full mt-10">
+    <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md mx-auto">
+        {% csrf_token %}
+
+        {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field.errors }}
+            {{ hidden_field }}
+        {% endfor %}
+
+        {% for field in form.visible_fields %}
+            {% if field.name == "savings_card"%}
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="id_savings_card">
+                      {{ field.label }}
+                  </label>
+                {{ form.savings_card }}
+                </div>
+            {% endif %}
+            {% if field.name == "card"%}
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="id_card">
+                      {{ field.label }}
+                  </label>
+                {{ form.card }}
+                </div>
+            {% endif %}
+            {% if field.name == "name" or field.name == "description" or field.name == "daily_percent" or field.name == "savings_percent" %}
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+                    <input
+                        class="shadow appearance-none border border-gray-300 rounded-md w-full mt-1 p-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        name="{{ field.name }}"
+                        id="{{ field.id_for_label }}"
+                        type="{{ field.widget_type }}"
+                        placeholder="{{ field.label }}"
+                    >
+
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <p class="text-red-600 text-sm italic mt-1">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endif %}
+            {% if field.name == "daily_control"%}
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="id_savings_card">
+                      {{ field.label }}
+                  </label>
+                {{ form.daily_control }}
+                </div>
+            {% endif %}
+
+            {% if field.name == "daily_redirect"%}
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="id_savings_card">
+                      {{ field.label }}
+                  </label>
+                {{ form.daily_redirect }}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                Create
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block head_title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-100 flex items-center justify-center">
+         <div class="bg-white mt-8 p-8 rounded shadow-md max-w-md text-center">
+            <h1 class="text-2xl font-bold mb-4">Select the transfer:</h1>
+            <button onclick="fund_transfer()" class="bg-blue-500 text-white py-2 px-4 rounded-md mb-2">Transfer by another card</button>
+            <button onclick="fund_transfer_card_by_card()" class="bg-green-500 text-white py-2 px-4 rounded-md">Transfer by my card</button>
+        </div>
+    </div>
+
+<script>
+    function fund_transfer() {
+        window.location.href = "{% url 'transactions:fund_transfer' %}";
+    }
+
+    function fund_transfer_card_by_card() {
+        window.location.href = "{% url 'transactions:fund_transfer_card_by_card' %}";
+    }
+</script>
+{% endblock %}

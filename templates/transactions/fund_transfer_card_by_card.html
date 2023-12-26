@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+
+{% block head_title %}{{ title }}{% endblock %}
+
+{% block content %}
+  <div class="max-w-md mx-auto mt-8 bg-white p-8 shadow-md">
+    <h2 class="flex items-center justify-center text-2xl font-semibold mb-6">Fund Transfer</h2>
+
+    <form method="post" action="{% url 'transactions:fund_transfer_card_by_card' %}" class="space-y-4">
+        {% csrf_token %}
+
+        <div>
+            {{ form.card_one }}
+        </div>
+
+        <div>
+            {{ form.card_two }}
+        </div>
+
+         <div class=" items-center justify-center mb-8">
+                <label for="amount" class="block text-sm font-medium text-gray-600">Amount</label>
+                <input type="text" name="amount" id="amount" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="Enter the amount">
+            </div>
+            {% if form.amount.errors %}
+                    {% for error in form.amount.errors %}
+                        <p class="text-red-600 text-sm italic mt-2">{{ error }}</p>
+                    {% endfor %}
+            {% endif %}
+
+        <div class="flex items-center justify-center mt-8">
+            <button type="submit" class="mx-auto bg-blue-500 text-white px-4 py-2 rounded-md mt-5">Transfer Funds</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <form id="userAddressForm" method="post" data-url="{% url 'accounts:edit_profile' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save</button>
+</form>
+{% endblock %}

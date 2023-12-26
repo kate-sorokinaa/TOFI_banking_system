@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block head_title %}User Profile{% endblock %}
+
+{% block content %}
+<h1 class="font-mono font-bold text-3xl text-center pb-5 pt-10">User Profile</h1>
+<hr />
+<div class="w-full mt-10">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+        <!-- Display User Information -->
+        <div class="flex flex-wrap -mx-3 mb-6">
+               <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Email: <b>{{user.email }}</b>
+                </label>
+            </div>
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    First Name: <b>{{user.first_name }}</b>
+                </label>
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Second Name: <b>{{user.last_name }}</b>
+                </label>
+            </div>
+             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Address: <b>{{address.street_address }}</b>
+                </label>
+                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Country: <b>{{address.country }}</b>
+                </label>
+                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    City: <b>{{address.city }}</b>
+                </label>
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Postal: <b>{{address.postal_code }}</b>
+                </label>
+            </div>
+        </div>
+         <div class="flex items-center justify-between">
+             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                 <a href="{% url 'accounts:edit_profile' %}">Edit</a>
+             </button>
+            </div>
+    </form>
+</div>
+{% endblock %}
