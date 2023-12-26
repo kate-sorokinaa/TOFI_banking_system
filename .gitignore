@@ -11,7 +11,6 @@ dist/
 db.json
 media/
 db.sqlite3
-staticfiles/
 .env
 celerybeat.pid
 celerybeat-schedule
