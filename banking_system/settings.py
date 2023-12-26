@@ -20,7 +20,7 @@ import dj_database_url
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -36,8 +36,8 @@ ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
-SUPABASE_DB_URL = os.environ.get("SUPABASE_DB_URL")
-DJANGO_ENV = os.environ.get('DJANGO_ENV')
+SUPABASE_DB_URL = os.getenv("SUPABASE_DB_URL")
+DJANGO_ENV = os.getenv('DJANGO_ENV')
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -163,7 +163,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATICFILES_DIRS = os.path.join(BASE_DIR, "static")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
 
