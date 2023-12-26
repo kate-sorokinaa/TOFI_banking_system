@@ -81,4 +81,5 @@ def count_monthly_budget(card_id):
     if system.savings_card is not None:
         system.savings_card.balance += card.balance * system.savings_percent / 100
         card.balance -= card.balance * system.savings_percent / 100
+        card.save()
         system.savings_card.save()
